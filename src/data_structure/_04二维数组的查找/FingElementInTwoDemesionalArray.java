@@ -1,4 +1,4 @@
-package data_structure.二维数组的查找;
+package data_structure._04二维数组的查找;
 
 /**
  * Created by sunshine on 2018/7/27.
