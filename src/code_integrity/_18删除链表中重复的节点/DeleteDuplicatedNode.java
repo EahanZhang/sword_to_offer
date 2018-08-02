@@ -14,39 +14,33 @@ import utils.ListNode;
  *
  * 思路：
  *  1. 因为链表是有序的，所以可以判断当前节点和其下一个节点是否重复。
+ *   1.1 若当前节点与下一个节点重复，则继续往下一直找到与当前节点不重复的节点
+ *   1.2 若不重复，当前节点向下一个节点挪动
  */
 
 public class DeleteDuplicatedNode {
     public ListNode deleteDuplication(ListNode pHead) {
         if (pHead == null || pHead.next == null) return pHead;
 
-        ListNode curHead = new ListNode(Integer.MIN_VALUE);
+        ListNode curHead = new ListNode(-1);
         curHead.next = pHead;
-        ListNode fast = pHead, slow = pHead.next;
-        ListNode preFast = curHead, preSlow = pHead;
-        boolean isDuplicated = false;
-        while (fast != null) {
-            while (slow != null) {
-                if (fast.val == slow.val) {
-                    slow = slow.next;
-                    preSlow.next = slow;
-                    isDuplicated = true;
-                } else {
-                    preSlow.next = slow;
-                    slow = slow.next;
+        ListNode p = pHead;
+        ListNode preP = curHead;
+        while (p != null && p.next != null) {
+            if (p.val == p.next.val) {
+                int val = p.val;
+                ListNode q = p.next.next;
+                while (q != null) {
+                    if (q.val != val) break;
+                    q = q.next;
                 }
-            }
-
-            if (isDuplicated) {
-                fast = fast.next;
-                preFast.next = fast;
-                isDuplicated = false;
+                p = q;
+                preP.next = p;
             } else {
-                preFast = fast;
-                fast = fast.next;
+                preP = p;
+                p = p.next;
             }
         }
         return curHead.next;
     }
-
 }
