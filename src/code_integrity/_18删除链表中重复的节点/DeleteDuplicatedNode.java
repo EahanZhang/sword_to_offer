@@ -13,11 +13,7 @@ import utils.ListNode;
  *  例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
  *
  * 思路：
- *  1. 创建一个新的结点，其next指针指向head
- *  2. 使用fast和slow两个指针，初始均指向head
- *  3. 当slow指向的结点包含的值与fast相同时，删除slow结点，并将标志位isDuplicated置位true。
- *  4. 当slow遍历完成时，若isDuplicated为true， 删除fast所指向的结点，fast指向下一个结点，isDuplicated置为false
- *  5. 重复3和4直到fast为空
+ *  1. 因为链表是有序的，所以可以判断当前节点和其下一个节点是否重复。
  */
 
 public class DeleteDuplicatedNode {
